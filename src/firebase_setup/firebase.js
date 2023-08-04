@@ -9,7 +9,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyDyF1vY8t71FBaQeXgzpSYXofk1uyjMeEw",
   authDomain: "gps-test-project-b13a0.firebaseapp.com",
-  //databaseURL: "https://gps-test-project-b13a0-default-rtdb.firebaseio.com",
+  databaseURL: "https://gps-test-project-b13a0-default-rtdb.firebaseio.com",
   projectId: "gps-test-project-b13a0",
   storageBucket: "gps-test-project-b13a0.appspot.com",
   messagingSenderId: "920038043246",

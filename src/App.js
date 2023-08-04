@@ -3,14 +3,24 @@ import React, { useMemo, useState, useEffect } from "react";
 import db from "./firebase_setup/firebase";
 import { getDatabase, ref, onValue } from "firebase/database";
 import car from "./images/car.png";
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  useLoadScript,
+  MarkerF,
+} from "@react-google-maps/api";
 
 export default function App() {
   const db = getDatabase();
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
   const [currentLocation, setCurrentLocation] = useState([]);
   const center = useMemo(() => ({ lat: 45.44437, lng: -73.82018 }), []);
+
   const fetchdata = async () => {
-    const starCountRef = ref(db, "location/");
+    const starCountRef = ref(db, "Location/");
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       setCurrentLocation(data);
@@ -21,10 +31,6 @@ export default function App() {
   useEffect(() => {
     fetchdata();
   }, []);
-
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
