@@ -4,8 +4,8 @@ dotenv.config();
 const express = require("express");
 const cors = require("cors");
 
-const accountSid = "";
-const authToken = "";
+const accountSid = "AC9b84cf10dd4c9c0d4525aff8640bd326";
+const authToken = "c162af99721b7bf625c6d938dffed08e";
 
 const client = require("twilio")(accountSid, authToken);
 

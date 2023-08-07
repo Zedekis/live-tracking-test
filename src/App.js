@@ -28,10 +28,11 @@ export default function App() {
   const [currentLocation, setCurrentLocation] = useState([]);
   const center = useMemo(() => ({ lat: 45.44437, lng: -73.82018 }), []);
 
-  id = navigator.geolocation.watchPosition(success);
+ 
 
   async function success(pos) {
     const crd = pos.coords;
+    
     await setDoc(doc(database, "/users", "Edris"), {
       Name: "Edris",
       Location: { lat: crd.latitude, lng: crd.longitude },
@@ -48,8 +49,9 @@ export default function App() {
 
     querySnapshot.forEach((doc) => {
       setCurrentLocation(doc.data().Location);
+      
     });
-
+    console.log(currentLocation)
     checkDistance();
   };
 
@@ -66,7 +68,13 @@ export default function App() {
   }
 
   useEffect(() => {
-    fetchdata();
+    const interval = setInterval(() =>{
+   
+      navigator.geolocation.getCurrentPosition(success);
+      fetchdata();
+    },1000);
+    return () => clearInterval(interval);
+    
   }, [id]);
 
   const sendText = () => {
