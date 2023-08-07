@@ -21,10 +21,10 @@ build-pages:
         paths:
             - public
 
-    pages:
-        stage: deploy
-        script:
-            - ls
-        artifacts: 
-            paths: 
-                - public
+pages:
+    stage: deploy
+    script:
+        - ls
+    artifacts: 
+        paths: 
+            - public
