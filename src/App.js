@@ -23,16 +23,14 @@ export default function App() {
   const target = { lat: 45.43233, lng: -73.84676 };
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCkXc9zl5kV9CxJOY0W0iDxDMPfzdMqBns",
   });
   const [currentLocation, setCurrentLocation] = useState([]);
   const center = useMemo(() => ({ lat: 45.44437, lng: -73.82018 }), []);
 
- 
-
   async function success(pos) {
     const crd = pos.coords;
-    
+
     await setDoc(doc(database, "/users", "Edris"), {
       Name: "Edris",
       Location: { lat: crd.latitude, lng: crd.longitude },
@@ -49,9 +47,8 @@ export default function App() {
 
     querySnapshot.forEach((doc) => {
       setCurrentLocation(doc.data().Location);
-      
     });
-    console.log(currentLocation)
+    console.log(currentLocation);
     checkDistance();
   };
 
@@ -68,13 +65,11 @@ export default function App() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() =>{
-   
+    const interval = setInterval(() => {
       navigator.geolocation.getCurrentPosition(success);
       fetchdata();
-    },1000);
+    }, 1000);
     return () => clearInterval(interval);
-    
   }, [id]);
 
   const sendText = () => {
